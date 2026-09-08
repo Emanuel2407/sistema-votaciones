@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface ICandidateService {
 
-    Page<CandidateResponseDto> findAllCandidates(Pageable pageable);
+    Page<CandidateResponseDto> findAllCandidates(String name, Pageable pageable);
 
     Candidate findCandidate(Long id);
 

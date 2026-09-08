@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface IVoterService {
 
-    Page<VoterResponseDto> findAllVoters(Pageable pageable);
+    Page<VoterResponseDto> findAllVoters(String name, Pageable pageable);
 
     Voter findVoter(Long id);
 

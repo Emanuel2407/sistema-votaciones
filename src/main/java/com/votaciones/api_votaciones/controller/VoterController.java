@@ -4,6 +4,7 @@ import com.votaciones.api_votaciones.dto.VoterRequestDto;
 import com.votaciones.api_votaciones.dto.VoterResponseDto;
 import com.votaciones.api_votaciones.service.IVoterService;
 import jakarta.validation.Valid;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -20,9 +21,12 @@ public class VoterController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<VoterResponseDto>> findAllVoters(Pageable pageable){
+    public ResponseEntity<Page<VoterResponseDto>> findAllVoters(
+            @RequestParam(required = false) String name,
+            @ParameterObject Pageable pageable
+    ){
         return ResponseEntity.ok(
-                voterService.findAllVoters(pageable)
+                voterService.findAllVoters(name, pageable)
         );
     }
 

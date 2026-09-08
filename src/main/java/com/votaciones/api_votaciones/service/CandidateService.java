@@ -51,10 +51,21 @@ public class CandidateService implements ICandidateService{
 
     @Transactional(readOnly = true)
     @Override
-    public Page<CandidateResponseDto> findAllCandidates(Pageable pageable) {
+    public Page<CandidateResponseDto> findAllCandidates(
+            String name,
+            Pageable pageable
+    ) {
+
+        if (name == null || name.isBlank()){
+            return buildCandidatesResponse(
+                    candidateRepo.findAll(pageable)
+            );
+
+        }
         return buildCandidatesResponse(
-                candidateRepo.findAll(pageable)
+                candidateRepo.findByNameContainingIgnoreCase(name, pageable)
         );
+
     }
 
     @Transactional(readOnly = true)

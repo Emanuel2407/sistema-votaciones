@@ -52,9 +52,18 @@ public class VoterService implements IVoterService{
 
     @Transactional(readOnly = true)
     @Override
-    public Page<VoterResponseDto> findAllVoters(Pageable pageable) {
+    public Page<VoterResponseDto> findAllVoters(
+            String name,
+            Pageable pageable
+    ) {
+        if (name == null || name.isBlank()){
+            return buildVotersResponse(
+                    voterRepo.findAll(pageable)
+            );
+        }
+
         return buildVotersResponse(
-                voterRepo.findAll(pageable)
+                voterRepo.findByNameContainingIgnoreCase(name, pageable)
         );
     }
 
