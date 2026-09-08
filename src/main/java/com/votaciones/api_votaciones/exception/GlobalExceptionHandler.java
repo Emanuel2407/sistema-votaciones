@@ -50,6 +50,24 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(CandidateNotFoundException.class)
+    public ResponseEntity<ErrorResponseBody> candidateNotFound(CandidateNotFoundException ex){
+        return ResponseEntity.status(
+                HttpStatus.NOT_FOUND
+        ).body(
+                buildErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage())
+        );
+    }
+
+    @ExceptionHandler(CandidateHasVotesException.class)
+    public ResponseEntity<ErrorResponseBody> candidateHasVotes(CandidateHasVotesException ex){
+        return ResponseEntity.status(
+                HttpStatus.CONFLICT
+        ).body(
+                buildErrorResponse(HttpStatus.CONFLICT, ex.getMessage())
+        );
+    }
+
     /**
      * Maneja los errores de validación de los DTOs y devuelve
      * los mensajes definidos en las anotaciones de validación.
