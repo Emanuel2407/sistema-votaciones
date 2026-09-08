@@ -24,5 +24,5 @@ public class Voter {
     private String email;
 
     @Column(name = "has_voted", nullable = false)
-    private Boolean hasVoted=false;
+    private boolean hasVoted=false;
 }

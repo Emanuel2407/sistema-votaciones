@@ -20,4 +20,31 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(VoterNotFoundException.class)
+    public ResponseEntity<ErrorResponseBody> voterNotFound(VoterNotFoundException ex){
+        return ResponseEntity.status(
+                HttpStatus.NOT_FOUND
+        ).body(
+                buildErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage())
+        );
+    }
+
+    @ExceptionHandler(VoterAlreadyVotedException.class)
+    public ResponseEntity<ErrorResponseBody> voterAlreadyVoted(VoterAlreadyVotedException ex){
+        return ResponseEntity.status(
+                HttpStatus.CONFLICT
+        ).body(
+                buildErrorResponse(HttpStatus.CONFLICT, ex.getMessage())
+        );
+    }
+
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponseBody> emailAlreadyExists(EmailAlreadyExistsException ex){
+        return ResponseEntity.status(
+                HttpStatus.CONFLICT
+        ).body(
+                buildErrorResponse(HttpStatus.CONFLICT, ex.getMessage())
+        );
+    }
+
 }
