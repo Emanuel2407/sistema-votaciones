@@ -53,7 +53,7 @@ public class VoterService implements IVoterService{
      * Busca votante por su ID o lanza excepción si no
      * existe
      */
-    private Voter findVoter(Long id){
+    public Voter findVoter(Long id){
         return voterRepo.findById(id)
                 .orElseThrow(
                         () -> new VoterNotFoundException("No existe votante con id: " + id)

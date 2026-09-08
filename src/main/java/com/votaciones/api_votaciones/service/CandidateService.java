@@ -52,7 +52,7 @@ public class CandidateService implements ICandidateService{
      * Busca candidato por su ID o lanza excepción si no
      * existe
      */
-    private Candidate findCandidate(Long id){
+    public Candidate findCandidate(Long id){
         return candidateRepo.findById(id)
                 .orElseThrow(
                         () -> new CandidateNotFoundException("No existe candidato con id: " + id)
