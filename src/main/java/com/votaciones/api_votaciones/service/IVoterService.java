@@ -3,12 +3,13 @@ package com.votaciones.api_votaciones.service;
 import com.votaciones.api_votaciones.dto.VoterRequestDto;
 import com.votaciones.api_votaciones.dto.VoterResponseDto;
 import com.votaciones.api_votaciones.model.Voter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 public interface IVoterService {
 
-    List<VoterResponseDto> findAllVoters();
+    Page<VoterResponseDto> findAllVoters(Pageable pageable);
 
     Voter findVoter(Long id);
 

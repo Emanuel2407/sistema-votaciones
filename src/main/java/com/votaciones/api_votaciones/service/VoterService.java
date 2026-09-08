@@ -7,11 +7,10 @@ import com.votaciones.api_votaciones.exception.VoterAlreadyVotedException;
 import com.votaciones.api_votaciones.exception.VoterNotFoundException;
 import com.votaciones.api_votaciones.model.Voter;
 import com.votaciones.api_votaciones.repository.IVoterRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class VoterService implements IVoterService{
@@ -34,19 +33,10 @@ public class VoterService implements IVoterService{
     }
 
     /**
-     * Transforma una lista de votantes en objetos DTO
-     * de respuesta
+     * Convierte los votantes de la página en sus respectivos DTO de respuesta
      */
-    private List<VoterResponseDto> buildVotersResponse(List<Voter> voters){
-        List<VoterResponseDto> votersResponseDto = new ArrayList<>();
-
-        for(Voter objVoter: voters){
-            votersResponseDto.add(
-                    buildVoterResponse(objVoter)
-            );
-        }
-
-        return votersResponseDto;
+    private Page<VoterResponseDto> buildVotersResponse(Page<Voter> voters) {
+        return voters.map(this::buildVoterResponse);
     }
 
     /**
@@ -62,9 +52,9 @@ public class VoterService implements IVoterService{
 
     @Transactional(readOnly = true)
     @Override
-    public List<VoterResponseDto> findAllVoters() {
+    public Page<VoterResponseDto> findAllVoters(Pageable pageable) {
         return buildVotersResponse(
-                voterRepo.findAll()
+                voterRepo.findAll(pageable)
         );
     }
 

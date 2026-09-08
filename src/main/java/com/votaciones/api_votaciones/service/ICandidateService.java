@@ -3,12 +3,12 @@ package com.votaciones.api_votaciones.service;
 import com.votaciones.api_votaciones.dto.CandidateRequestDto;
 import com.votaciones.api_votaciones.dto.CandidateResponseDto;
 import com.votaciones.api_votaciones.model.Candidate;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ICandidateService {
 
-    List<CandidateResponseDto> findAllCandidates();
+    Page<CandidateResponseDto> findAllCandidates(Pageable pageable);
 
     Candidate findCandidate(Long id);
 

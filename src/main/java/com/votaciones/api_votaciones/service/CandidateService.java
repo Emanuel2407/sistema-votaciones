@@ -6,11 +6,10 @@ import com.votaciones.api_votaciones.exception.CandidateHasVotesException;
 import com.votaciones.api_votaciones.exception.CandidateNotFoundException;
 import com.votaciones.api_votaciones.model.Candidate;
 import com.votaciones.api_votaciones.repository.ICandidateRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class CandidateService implements ICandidateService{
@@ -33,19 +32,10 @@ public class CandidateService implements ICandidateService{
     }
 
     /**
-     * Transforma una lista de candidatos en objetos DTO
-     * de respuesta
+     * Convierte los candidatos de la página en sus respectivos DTOs de respuesta
      */
-    private List<CandidateResponseDto> buildCandidatesResponse(List<Candidate> candidates){
-        List<CandidateResponseDto> candidatesResponse = new ArrayList<>();
-
-        for(Candidate objCandidate: candidates){
-            candidatesResponse.add(
-                    buildCandidateResponse(objCandidate)
-            );
-        }
-
-        return candidatesResponse;
+    private Page<CandidateResponseDto> buildCandidatesResponse(Page<Candidate> candidates){
+        return candidates.map(this::buildCandidateResponse);
     }
 
     /**
@@ -61,9 +51,9 @@ public class CandidateService implements ICandidateService{
 
     @Transactional(readOnly = true)
     @Override
-    public List<CandidateResponseDto> findAllCandidates() {
+    public Page<CandidateResponseDto> findAllCandidates(Pageable pageable) {
         return buildCandidatesResponse(
-                candidateRepo.findAll()
+                candidateRepo.findAll(pageable)
         );
     }
 
