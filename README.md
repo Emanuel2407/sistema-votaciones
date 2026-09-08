@@ -96,6 +96,23 @@ http://localhost:8080
 
 ---
 
+## 📖 Documentación de la API
+
+La API cuenta con documentación interactiva mediante **Swagger UI**, generada con SpringDoc OpenAPI.
+
+Una vez iniciada la aplicación, puedes acceder a la documentación desde:
+
+👉 [Swagger UI](http://localhost:8080/swagger-ui/index.html)
+
+Desde Swagger es posible consultar y probar directamente los endpoints disponibles de:
+
+- 👤 Votantes
+- 🧑‍💼 Candidatos
+- 🗳️ Votos
+- 📊 Estadísticas de la votación
+
+---
+
 ## 🔌 Endpoints principales
 
 ### 👤 Votantes
