@@ -96,6 +96,39 @@ http://localhost:8080
 
 ---
 
+## 🔌 Endpoints principales
+
+### 👤 Votantes
+
+- `POST /voters` — Registrar un votante.
+- `GET /voters` — Obtener todos los votantes.
+- `GET /voters/{id}` — Obtener un votante por ID.
+- `DELETE /voters/{id}` — Eliminar un votante.
+
+### 🧑‍💼 Candidatos
+
+- `POST /candidates` — Registrar un candidato.
+- `GET /candidates` — Obtener todos los candidatos.
+- `GET /candidates/{id}` — Obtener un candidato por ID.
+- `DELETE /candidates/{id}` — Eliminar un candidato.
+
+### 🗳️ Votos
+
+- `POST /votes` — Emitir un voto.
+- `GET /votes` — Obtener los votos registrados.
+- `GET /votes/statistics` — Obtener las estadísticas de la votación.
+
+### Ejemplo: emitir un voto
+
+```json
+{
+  "voterId": 1,
+  "candidateId": 1
+}
+```
+
+---
+
 ## 🗳️ Votos registrados
 
 El endpoint `GET /votes` permite consultar los votos emitidos y verificar la información almacenada para cada votación.
